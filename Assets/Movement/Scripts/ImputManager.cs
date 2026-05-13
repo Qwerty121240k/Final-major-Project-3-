@@ -6,6 +6,9 @@ public class ImputManager : MonoBehaviour
 
    public Vector2 movementInput;
 
+    public float verticalInput;
+    public float horizontalInput;
+
     private void OnEnable()
     {
         if (playerControls == null) 
@@ -21,6 +24,11 @@ public class ImputManager : MonoBehaviour
         playerControls.Disable();
     }
 
+    private void HandleMovementInput()
+    {
+        verticalInput = movementInput.y;
+        horizontalInput = movementInput.x;
+    }
 
 
 
