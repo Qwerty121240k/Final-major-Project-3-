@@ -18,9 +18,17 @@ public class PlayerLocomotion : MonoBehaviour
     {
         inputManager=GetComponent<ImputManager>();
         playerRigidBody=GetComponent<Rigidbody>();
+        CameraObject = Camera.main.transform;
     }
 
-    public void HandleMovement()
+
+    public void HandleAllMovement()
+    {
+        HandleMovement();
+        rotation();
+    }
+
+    private void HandleMovement()
     {
 
         moveDirecton = CameraObject.forward * inputManager.verticalInput;
@@ -33,7 +41,7 @@ public class PlayerLocomotion : MonoBehaviour
         playerRigidBody.linearVelocity=movementVelocity;
 
     }
-    public void rotation() //get rotated idiot
+    private void rotation() //get rotated idiot
     
     {
         Vector3 targetDirection = Vector3.zero;
@@ -41,6 +49,12 @@ public class PlayerLocomotion : MonoBehaviour
         targetDirection=CameraObject.forward * inputManager.verticalInput;
         targetDirection = targetDirection+CameraObject.right * inputManager.horizontalInput; targetDirection.Normalize();
         targetDirection.y = 0;
+
+        if (targetDirection == Vector3.zero)
+            targetDirection = transform.forward;
+
+
+
 
         Quaternion targetRotaton = Quaternion.LookRotation(targetDirection);
         Quaternion playerRotation = Quaternion.Slerp(transform.rotation, targetRotaton, RotationSpeed* Time.deltaTime);

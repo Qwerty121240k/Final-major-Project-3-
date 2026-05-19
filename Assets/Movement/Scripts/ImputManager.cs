@@ -22,6 +22,12 @@ public class ImputManager : MonoBehaviour
     private void OnDisable()
     {
         playerControls.Disable();
+    }  
+
+    public void HandleAllInputs()
+    {
+        HandleMovementInput();
+
     }
 
     private void HandleMovementInput()
