@@ -3,12 +3,20 @@ using UnityEngine;
 public class ImputManager : MonoBehaviour
 {
    PlayerControls playerControls;
+    AnimatorManager animatorManager;
 
    public Vector2 movementInput;
-
+    private float MoveAmount;
+    
     public float verticalInput;
     public float horizontalInput;
 
+
+
+    private void Awake()
+    {
+        animatorManager = GetComponent<AnimatorManager>();
+    }
     private void OnEnable()
     {
         if (playerControls == null) 
@@ -34,6 +42,8 @@ public class ImputManager : MonoBehaviour
     {
         verticalInput = movementInput.y;
         horizontalInput = movementInput.x;
+        MoveAmount = Mathf.Clamp01(Mathf.Abs(horizontalInput) + Mathf.Abs(verticalInput));
+        animatorManager.UpdateAnimatorValues(0, MoveAmount);
     }
 
 

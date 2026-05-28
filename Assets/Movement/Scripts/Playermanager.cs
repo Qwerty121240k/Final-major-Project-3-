@@ -6,11 +6,13 @@ public class Playermanager : MonoBehaviour
 {
 
     ImputManager imputManager;
+    CameraManager cameraManager;
     PlayerLocomotion locomotion;
 
     private void Awake()
     {
         imputManager=GetComponent<ImputManager>();
+        cameraManager = FindObjectOfType<CameraManager>();
         locomotion=GetComponent<PlayerLocomotion>();
 
 
@@ -23,5 +25,9 @@ public class Playermanager : MonoBehaviour
     private void FixedUpdate()
     {
         locomotion.HandleAllMovement();
+    }
+    private void LateUpdate()
+    {
+        cameraManager.followTarget();
     }
 }
