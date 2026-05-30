@@ -6,6 +6,11 @@ public class ImputManager : MonoBehaviour
     AnimatorManager animatorManager;
 
    public Vector2 movementInput;
+    public Vector2 cameraInput;
+
+    public float cameraInputX;
+          public float cameraInputY;
+
     private float MoveAmount;
     
     public float verticalInput;
@@ -23,7 +28,7 @@ public class ImputManager : MonoBehaviour
         { playerControls=new PlayerControls();
 
             playerControls.PlayerMovement.Movement.performed += i => movementInput = i.ReadValue<Vector2>();
-        
+            playerControls.PlayerMovement.Camera.performed += i => cameraInput = i.ReadValue<Vector2>();
         }
         playerControls.Enable();
     }
@@ -42,8 +47,16 @@ public class ImputManager : MonoBehaviour
     {
         verticalInput = movementInput.y;
         horizontalInput = movementInput.x;
+
+         cameraInputY = cameraInput.y;
+        cameraInputX = cameraInput.x;
+       
+
         MoveAmount = Mathf.Clamp01(Mathf.Abs(horizontalInput) + Mathf.Abs(verticalInput));
         animatorManager.UpdateAnimatorValues(0, MoveAmount);
+
+
+
     }
 
 

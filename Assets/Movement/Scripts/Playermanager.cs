@@ -28,6 +28,6 @@ public class Playermanager : MonoBehaviour
     }
     private void LateUpdate()
     {
-        cameraManager.followTarget();
+        cameraManager.HandleCamera();
     }
 }
